@@ -21,7 +21,7 @@ Repository for the **Event Management System**, focusing exclusively on **testin
 - **Backend:** Node.js + Express.js (RESTful APIs)
 - **Database:** MariaDB (relational data storage)
 
-### Deliverables 📦 
+### Deliverables 📑 
 - **Postman Collection (`.json` + environment):**
   - User registration & login
   - Admin-only endpoints for event management
