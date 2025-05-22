@@ -1,0 +1,1976 @@
+{
+	"info": {
+		"_postman_id": "81f23bf6-9fe7-49bc-b619-4d4467fb12b0",
+		"name": "Event Management System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42960527"
+	},
+	"item": [
+		{
+			"name": "User Registration",
+			"item": [
+				{
+					"name": "Create new user account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check for 201 Created status\r",
+									"pm.test(\"Status code is 201\", () => {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Validate response structure\r",
+									"pm.test(\"Response has success message and userId\", () => {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response).to.have.property(\"message\", \"User registered successfully.\");\r",
+									"    pm.expect(response).to.have.property(\"userId\").that.is.a(\"number\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"username\": \"johndoe\",\r\n\"email\": \"john.doe@example.com\",\r\n\"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Registration request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"username\": \"johndoe\",\r\n\"email\": \"john.doe@example.com\",\r\n\"password\": \"password123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/register",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "229"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"e5-xUfwU9I+3YA9j3I2bFIPkh5v0pA\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Mar 2025 12:54:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isAdmin\": false,\n    \"id\": 14,\n    \"username\": \"johndoe\",\n    \"email\": \"john.doe@example.com\",\n    \"password\": \"$2b$10$FBNJFieapsSWCVYrHvj9EOkgpPV1YCKTLY8HjJQLFEDzziX2MCWl.\",\n    \"updatedAt\": \"2025-03-12T12:54:08.768Z\",\n    \"createdAt\": \"2025-03-12T12:54:08.768Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create new user account (duplicate)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check for 400 Bad Request status\r",
+									"pm.test(\"Status code is 400\", () => {\r",
+									"    pm.response.to.have.status(400);\r",
+									"    });\r",
+									"\r",
+									"// Validate response structure\r",
+									"pm.test(\"Error message for duplicate email\", () => {\r",
+									"  const response = pm.response.json();\r",
+									"  pm.expect(response).to.have.property(\"error\", \"Email already exists.\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"username\": \"johndoe\",\r\n\"email\": \"john.doe@example.com\",\r\n\"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Duplicate request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"username\": \"johndoe\",\r\n\"email\": \"john.doe@example.com\",\r\n\"password\": \"password123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/register",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "21"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"15-LcnTdGR/0D25aVgnVgwSDJVDYmg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Mar 2025 12:57:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Something went wrong!"
+						}
+					]
+				}
+			],
+			"description": "This folder has the **endpoints** relating to User Registration."
+		},
+		{
+			"name": "User Login",
+			"item": [
+				{
+					"name": "Login request authorized",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check for 200 status code\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Validate the response contains a JWT token\r",
+									"pm.test(\"Response includes a JWT token\", () => {\r",
+									"  const response = pm.response.json();\r",
+									"  pm.expect(response).to.have.property(\"token\").that.is.a(\"string\");\r",
+									"  pm.expect(response.token).to.include(\".\"); // JWT structure: header.payload.signature\r",
+									"});\r",
+									"\r",
+									"// Save the token as a variable for future requests\r",
+									"pm.environment.set(\"jwtToken\", pm.response.json().token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"john.doe@example.com\",\r\n    \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login request authorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"email\": \"john.doe@example.com\",\r\n\"password\": \"password123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "177"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b1-Thi4pAfTdm08BzeGrWezK1821VE\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Mar 2025 13:07:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzQxNzg0ODc4LCJleHAiOjE3NDE3ODg0Nzh9.4sv1BohvXO58CvKip1d3tt4afHA8dSzJ9vvq2sz5UOE\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login request unauthorized",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", () => {\r",
+									"  pm.response.to.have.status(401);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Error message is correct\", () => {\r",
+									"  const response = pm.response.json();\r",
+									"  pm.expect(response).to.have.property(\"error\", \"Invalid email or password.\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"nonexistent@example.com\",\r\n  \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login request unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"nonexistent@example.com\",\r\n  \"password\": \"password123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f-mRYQ6Yx/raK/ssDeWseqQCiH0yM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Mar 2025 13:14:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Invalid credentials\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Invalid Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", () => {\r",
+									"  pm.response.to.have.status(401);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Error message is correct\", () => {\r",
+									"  const response = pm.response.json();\r",
+									"  pm.expect(response).to.have.property(\"error\", \"Invalid email or password.\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"john.doe@example.com\",\r\n  \"password\": \"wrongpassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Invalid password request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"john.doe@example.com\",\r\n  \"password\": \"wrongpassword\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f-mRYQ6Yx/raK/ssDeWseqQCiH0yM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Mar 2025 13:32:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Invalid credentials\"\n}"
+						}
+					]
+				}
+			],
+			"description": "This folder has the **endpoints** relating to User Login authentication and return of JWT."
+		},
+		{
+			"name": "Admin APIs",
+			"item": [
+				{
+					"name": "Admin Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check for 200 status code\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Validate the response contains a JWT token\r",
+									"pm.test(\"Response includes a JWT token\", () => {\r",
+									"  const response = pm.response.json();\r",
+									"  pm.expect(response).to.have.property(\"token\").that.is.a(\"string\");\r",
+									"  pm.expect(response.token).to.include(\".\"); // JWT structure: header.payload.signature\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@test.com\",\r\n    \"password\": \"admin123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login request authorized Copy",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@test.com\",\r\n    \"password\": \"admin123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "175"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"af-1h8pr9hQ6D48qzMnlWGMmArStMo\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Mar 2025 21:46:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlzQWRtaW4iOnRydWUsImlhdCI6MTc0MTgxNTk2MywiZXhwIjoxNzQxODE5NTYzfQ.CbGl3JajGdkfjRlzrq5yyfHLngwp7yRCFnHcLFnWAtw\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create valid event",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test: Ensure we receive a 201 Created status\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test: Check that the response returns the new event details with required properties\r",
+									"pm.test(\"Response contains expected event properties\", () => {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  // Ensure it's an object\r",
+									"  pm.expect(jsonData).to.be.an(\"object\");\r",
+									"  \r",
+									"  // Check each property\r",
+									"  pm.expect(jsonData).to.have.property(\"id\");\r",
+									"  pm.expect(jsonData).to.have.property(\"name\", \"Art Exhibition\");\r",
+									"  pm.expect(jsonData).to.have.property(\"description\", \"An exhibition of contemporary art pieces.\");\r",
+									"  \r",
+									"  // Verify the date ignoring the time part\r",
+									"  const datePart = jsonData.date.substring(0, 10);  // Extract the first 10 characters\r",
+									"  pm.expect(datePart).to.eql(\"2025-01-10\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_JWT_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"name\": \"Art Exhibition\",\r\n\"description\": \"An exhibition of contemporary art pieces.\",\r\n\"date\": \"2025-01-10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/events",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create valid event",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"name\": \"Art Exhibition\",\r\n\"description\": \"An exhibition of contemporary art pieces.\",\r\n\"date\": \"2025-01-10\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "202"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ca-q7gmDjAlgJnyUuaZJAOhulHEJJI\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Mar 2025 21:51:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 8,\n    \"name\": \"Art Exhibition\",\n    \"description\": \"An exhibition of contemporary art pieces.\",\n    \"date\": \"2025-01-10T00:00:00.000Z\",\n    \"updatedAt\": \"2025-03-12T21:51:42.191Z\",\n    \"createdAt\": \"2025-03-12T21:51:42.191Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create invalid event",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test: Ensure we receive a 403 Forbidden status for non-admin\r",
+									"pm.test(\"Status code is 403 for non-admin access\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"// Test: Check that the error message indicates admin access is required\r",
+									"pm.test(\"Error message indicates admin access is required\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"error\", \"Admin access required.\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"name\": \"Art Exhibition\",\r\n\"description\": \"An exhibition of contemporary art pieces.\",\r\n\"date\": \"2025-01-10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/events",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create invalid event",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"name\": \"Art Exhibition\",\r\n\"description\": \"An exhibition of contemporary art pieces.\",\r\n\"date\": \"2025-01-10\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "26"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a-n7HGJaeNMyNPmeZ5FARY1k3xJx4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Mar 2025 21:53:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Invalid token.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get RSVP for event authorized",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test: Ensure status code is 200 for a successful admin request\r",
+									"pm.test(\"Status code is 200 for successful retrieval of RSVPs\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test: Response is an array of user RSVP objects with expected properties\r",
+									"pm.test(\"Response contains an array of RSVP user objects\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.be.an(\"array\");\r",
+									"  if (jsonData.length > 0) {\r",
+									"    jsonData.forEach(user => {\r",
+									"      pm.expect(user).to.have.property(\"userId\");\r",
+									"      pm.expect(user).to.have.property(\"username\");\r",
+									"      pm.expect(user).to.have.property(\"email\");\r",
+									"    });\r",
+									"  } else {\r",
+									"    console.log(\"No RSVPs found for this event.\");\r",
+									"  }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_JWT_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/events/:eventId/rsvps",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"events",
+								":eventId",
+								"rsvps"
+							],
+							"variable": [
+								{
+									"key": "eventId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error due to inconsistence naming between db(event_id) and code(EventId)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/events/:eventId/rsvps",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"events",
+										":eventId",
+										"rsvps"
+									],
+									"variable": [
+										{
+											"key": "eventId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "21"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"15-LcnTdGR/0D25aVgnVgwSDJVDYmg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Mar 2025 22:20:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Something went wrong!"
+						}
+					]
+				},
+				{
+					"name": "Get RSVP for event unauthorized",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test: Ensure status code is 403 for non-admin access\r",
+									"pm.test(\"Status code is 403 for unauthorized access\", function () {\r",
+									"  pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"// Test: Check that the error message indicates admin access is required\r",
+									"pm.test(\"Error message indicates admin access required\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.property(\"error\", \"Admin access required.\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/events/:eventId/rsvps",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"events",
+								":eventId",
+								"rsvps"
+							],
+							"variable": [
+								{
+									"key": "eventId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get RSVP for event unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/events/:eventId/rsvps",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"events",
+										":eventId",
+										"rsvps"
+									],
+									"variable": [
+										{
+											"key": "eventId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "26"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a-n7HGJaeNMyNPmeZ5FARY1k3xJx4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Mar 2025 22:30:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Invalid token.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete event authorized",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test: Check that the status code is 200 for a successful deletion\r",
+									"pm.test(\"Status code is 200 for successful deletion\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test: Verify the response message\r",
+									"pm.test(\"Response returns deletion success message\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.property(\"message\", \"Event deleted successfully.\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"packages": {},
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_JWT_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/events/:eventId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"events",
+								":eventId"
+							],
+							"variable": [
+								{
+									"key": "eventId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete event authorized",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/events/:eventId",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"events",
+										":eventId"
+									],
+									"variable": [
+										{
+											"key": "eventId",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-czTKgFSf6LQr6n6FHk7bdlnK6tA\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Mar 2025 22:36:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Event deleted successfully.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete nonexistent event",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test: Check that the status code is 404 when event does not exist\r",
+									"pm.test(\"Status code is 404 for non-existent event\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"// Test: Verify the error message for non-existent event\r",
+									"pm.test(\"Response returns error message for event not found\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.property(\"error\", \"Event not found.\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_JWT_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/events/:eventId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"events",
+								":eventId"
+							],
+							"variable": [
+								{
+									"key": "eventId",
+									"value": "999"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete nonexistent event",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/events/:eventId",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"events",
+										":eventId"
+									],
+									"variable": [
+										{
+											"key": "eventId",
+											"value": "999"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "28"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c-1ms2O8XArlR8QK3kXVj4vJEvf50\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Mar 2025 22:38:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Event not found.\"\n}"
+						}
+					]
+				}
+			],
+			"description": "This folder has the **endpoints** relating to Admin APIs for event management"
+		},
+		{
+			"name": "User APIs",
+			"item": [
+				{
+					"name": "Get all events",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test: Status code should be 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test: Response body should be an array\r",
+									"pm.test(\"Response is an array\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"// Test: Each event object should have id, name, description, and date\r",
+									"pm.test(\"Each event has required properties\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    if (jsonData.length > 0) {\r",
+									"        jsonData.forEach(event => {\r",
+									"            pm.expect(event).to.have.property(\"id\");\r",
+									"            pm.expect(event).to.have.property(\"name\");\r",
+									"            pm.expect(event).to.have.property(\"description\");\r",
+									"            pm.expect(event).to.have.property(\"date\");\r",
+									"        });\r",
+									"    } else {\r",
+									"        // Optionally, log a message if there are no events (which might be expected if the DB is empty)\r",
+									"        console.log(\"No events returned; ensure events exist in the database.\");\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/events",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get all events",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "431"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1af-+AykDMBbyUHOiFFny86PcnBy8/M\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Mar 2025 14:47:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Music Festival\",\n        \"description\": \"A grand music festival featuring various artists.\",\n        \"date\": \"2024-12-15\",\n        \"createdAt\": \"2025-03-12T16:28:46.000Z\",\n        \"updatedAt\": \"2025-03-12T16:28:46.000Z\",\n        \"rsvped\": false\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Tech Conference\",\n        \"description\": \"A conference to showcase the latest technology trends.\",\n        \"date\": \"2024-12-20\",\n        \"createdAt\": \"2025-03-12T16:31:10.000Z\",\n        \"updatedAt\": \"2025-03-12T16:31:10.000Z\",\n        \"rsvped\": false\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "RSVP to valid event",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test: Ensure status code is 200\r",
+									"pm.test(\"Status code is 200 for successful RSVP\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test: Response contains the correct confirmation message and eventId\r",
+									"pm.test(\"Response confirms RSVP and returns eventId\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.property(\"message\", \"RSVP confirmed for event.\");\r",
+									"  pm.expect(jsonData).to.have.property(\"eventId\", 1);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/events/:eventId/rsvps",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"events",
+								":eventId",
+								"rsvps"
+							],
+							"variable": [
+								{
+									"key": "eventId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RSVP to valid event",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/events/:eventId/rsvps",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"events",
+										":eventId",
+										"rsvps"
+									],
+									"variable": [
+										{
+											"key": "eventId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "114"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"72-758FgK31LMSvWexnobSE2MCyFzw\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Mar 2025 22:00:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"user_id\": 14,\n    \"event_id\": \"1\",\n    \"updatedAt\": \"2025-03-12T22:00:35.971Z\",\n    \"createdAt\": \"2025-03-12T22:00:35.971Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "RSVP to invalid event",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test: Ensure status code is 404 for non-existent event RSVP\r",
+									"pm.test(\"Status code is 404 for non-existent event RSVP\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"// Test: Check that the error message indicates the event was not found\r",
+									"pm.test(\"Error message indicates event not found\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.property(\"error\", \"Event not found.\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/events/:eventId/rsvps",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"events",
+								":eventId",
+								"rsvps"
+							],
+							"variable": [
+								{
+									"key": "eventId",
+									"value": "999"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RSVP to invalid event",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/events/:eventId/rsvps",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"events",
+										":eventId",
+										"rsvps"
+									],
+									"variable": [
+										{
+											"key": "eventId",
+											"value": "999"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "28"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c-1ms2O8XArlR8QK3kXVj4vJEvf50\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Mar 2025 22:04:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Event not found.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "View user profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test: Ensure the status code is 200 for a successful profile retrieval\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test: Validate the user profile object contains the required properties\r",
+									"pm.test(\"Response contains user profile properties\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.be.an(\"object\");\r",
+									"  pm.expect(jsonData).to.have.property(\"id\");\r",
+									"  pm.expect(jsonData).to.have.property(\"username\");\r",
+									"  pm.expect(jsonData).to.have.property(\"email\");\r",
+									"  pm.expect(jsonData).to.have.property(\"isAdmin\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "api route provided doesn't seem to be correct",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/profile",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"profile"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'none'"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "156"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Mar 2025 22:48:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"utf-8\">\n        <title>Error</title>\n    </head>\n    <body>\n        <pre>Cannot GET /api/users/profile</pre>\n    </body>\n</html>"
+						}
+					]
+				}
+			],
+			"description": "This folder has the **endpoints** relating to User APIs for viewing user profile, events and RSVPing"
+		}
+	]
+}
